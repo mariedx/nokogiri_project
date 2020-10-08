@@ -23,7 +23,5 @@ end
 
 def c_hash(page)
   hash_crypto = Hash[c_names(page).zip(c_values(page))]
-  puts hash_crypto
+  return hash_crypto
 end
-
-c_hash(page)

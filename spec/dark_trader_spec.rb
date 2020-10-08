@@ -1,13 +1,29 @@
 require_relative '../lib/dark_trader'
 
-describe "program" do
+page = Nokogiri::HTML(URI.open("https://coinmarketcap.com/all/views/all/"))   
+
+describe "c_hash" do
   it "no erreur & no nil" do
-    expect(c_names(nil)).to eq("nil detected")
-    expect(c_names(Bitcoin)).to eq("ok")
-    expect(c_names(Polkadot)).to eq("ok")
-    expect(c_names(Cosmos)).to eq("ok")
+      expect(c_hash(page)).not_to be_empty 
   end
 end 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # describe "array consistency" do
@@ -18,6 +34,10 @@ end
 
 # describe "array" do
 #   it "size ok" do
-#     expect(c_values(0,0)).to eq(200)
+#     expect(5).to be > 200
 #   end
 # end 
+
+# describe "hash " do
+#   it "runs" do
+#   expect(c_hash(Bitcoin, $).with(hash_including(a: 1))
