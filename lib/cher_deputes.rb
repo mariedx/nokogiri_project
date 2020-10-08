@@ -38,17 +38,23 @@ def deputes_last_name(list)
   return last_name
 end
 
-def perform(list)
-    deputes_first_name(list)
-    deputes_last_name(list)
-    # deputes_email(list)
-end
-
 def array_final(list)
+  first = deputes_first_name(list)
+  last = deputes_last_name(list)
+  # emails = deputes_email(list)
+
   array_final = []
-  perform(list).each do |xx|
-  array_final << {"first name" => deputes_first_name(xx), "last_name" => deputes_last_name(xx)}
+
+  if first.length == last.length
+    first.length.times do |i|
+    hash_of_name = {}
+    hash_of_name["first name"] = first[i]
+    hash_of_name['last name'] = last[i]
+    # hash_of_name['email'] = emails[i]
+      array_final << hash_of_name
+    end 
   end
+
   return array_final
 end
 
