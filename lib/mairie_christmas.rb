@@ -39,5 +39,13 @@ def hash_1(valedoise)
   return array_final
 end
 
+def perform 
+  valedoise = Nokogiri::HTML(URI.open("https://www.annuaire-des-mairies.com/val-d-oise.html"))
+  get_townhall_urls(valedoise)
+  get_townhall_email(valedoise)
+  towns_names(valedoise)
+  @array_final = hash_1(valedoise)
+end
+
 
 

@@ -59,3 +59,41 @@ def array_final(list)
 end
 
 puts array_final(list)
+
+
+
+
+
+
+
+
+
+def scrap_assemblee
+  #Recupe site de l'assemblee
+  doc = Nokogiri::HTML(URI.open("http://www2.assemblee-nationale.fr/deputes/liste/tableau%22"))
+  #preparation de l'array
+  array_depute = []
+  #On prend tout les liens "a" dans un objet "td"
+  doc.xpath('//td/a').each do |node|
+
+    #lobjet node text est sous format "M. xxx xxx" est divisé où [0] est M. ou Mme, [1] prenom, [2] nom
+    prenom_depute = node.text.split(' ')[1]
+    nom_depute = node.text.split(' ')[2]
+    #On créer les liens à visiter
+    link = "http://www2.assemblee-nationale.fr/" + node['href']
+    page_depute = Nokogiri::HTML(URI.open(link)) #On ouvre le lien de chaque depute
+    email_depute = page_depute.xpath("//li[text()='Mél : ']/a").text #On target la partie "li" qui contient comme texte "mél"
+
+    #On a toute les infos qu'il nous faut, on créer donc le hash et on le rempli avant de le mettre dans l'array
+    hash_depute = Hash.new
+    hash_depute["first_name"] = prenom_depute
+    hash_depute["last_name"] = nom_depute
+    hash_depute["email"] = email_depute
+    array_depute << hash_depute 
+
+  end
+  return array_depute
+end
+
+#Pour tester enlever commentaire
+#puts scrap_assemblee
